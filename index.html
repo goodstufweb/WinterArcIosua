@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -13,15 +12,43 @@
     }
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       color: #2c3e50;
     }
+
+    /* Button-Leiste */
+    .day-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    .day-buttons button {
+      background: #34495e;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    .day-buttons button:hover {
+      background: #2c3e50;
+    }
+    .day-buttons button.active {
+      background: #1abc9c;
+    }
+
+    /* Tabellen */
     table {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 40px;
       background: #fff;
       box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+      display: none; /* Standardmäßig ausgeblendet */
     }
     th, td {
       border: 1px solid #ddd;
@@ -42,84 +69,212 @@
       text-align: center;
       font-size: 18px;
     }
+
+    /* Klickbare Routinen */
+    .routine-link {
+      color: #1abc9c;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 500px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .modal h2 {
+      color: #2c3e50;
+      text-align: center;
+    }
+    .modal ul {
+      margin-top: 10px;
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+    .close-btn {
+      float: right;
+      cursor: pointer;
+      font-size: 20px;
+      color: #555;
+    }
+    .close-btn:hover {
+      color: #000;
+    }
   </style>
 </head>
 <body>
   <h1>Winter Arc Plan</h1>
 
+  <!-- Navigation -->
+  <div class="day-buttons">
+    <button onclick="showDay('montag')" class="active">Montag</button>
+    <button onclick="showDay('dienstag')">Dienstag</button>
+    <button onclick="showDay('mittwoch')">Mittwoch</button>
+    <button onclick="showDay('donnerstag')">Donnerstag</button>
+    <button onclick="showDay('freitag')">Freitag</button>
+  </div>
+
   <!-- Montag -->
-  <table>
+  <table id="montag" style="display: table;">
     <tr><td colspan="2" class="day">Montag</td></tr>
     <tr><th>Zeit</th><th>Aktivität</th></tr>
     <tr><td>06:00</td><td>Aufstehen</td></tr>
-    <tr><td>06:00 - 06:50</td><td>Morgenroutine</td></tr>
+    <tr><td>06:00 - 06:50</td><td><span class="routine-link" onclick="openRoutine('morning')">Morgenroutine</span></td></tr>
     <tr><td>06:50 - 14:30</td><td>Schule</td></tr>
     <tr><td>14:30 - 15:30</td><td>Essen / Relax</td></tr>
     <tr><td>15:30 - 16:00</td><td>Hausübungen</td></tr>
     <tr><td>16:00 - 17:30</td><td>Workout (Spielplatz)</td></tr>
     <tr><td>17:30 - 18:00</td><td>Relax / Business / Darius telefonieren</td></tr>
     <tr><td>18:30 - 21:00</td><td>Kirche</td></tr>
-    <tr><td>21:00</td><td>Abendroutine</td></tr>
+    <tr><td>21:00</td><td><span class="routine-link" onclick="openRoutine('evening')">Abendroutine</span></td></tr>
     <tr><td>22:00</td><td>Schlafen</td></tr>
   </table>
 
   <!-- Dienstag -->
-  <table>
+  <table id="dienstag">
     <tr><td colspan="2" class="day">Dienstag</td></tr>
     <tr><th>Zeit</th><th>Aktivität</th></tr>
     <tr><td>06:00</td><td>Aufstehen</td></tr>
-    <tr><td>06:00 - 06:50</td><td>Morgenroutine</td></tr>
+    <tr><td>06:00 - 06:50</td><td><span class="routine-link" onclick="openRoutine('morning')">Morgenroutine</span></td></tr>
     <tr><td>06:50 - 17:00</td><td>Schule</td></tr>
     <tr><td>17:00 - 18:00</td><td>Essen / Relax</td></tr>
     <tr><td>18:00 - 18:30</td><td>Lernen</td></tr>
     <tr><td>18:30 - 19:30</td><td>Workout</td></tr>
     <tr><td>19:30 - 20:00</td><td>Dienstag Routine</td></tr>
-    <tr><td>20:00</td><td>Abendroutine / Frei</td></tr>
+    <tr><td>20:00</td><td><span class="routine-link" onclick="openRoutine('evening')">Abendroutine</span></td></tr>
     <tr><td>22:00 - 23:00</td><td>Schlafen</td></tr>
   </table>
 
   <!-- Mittwoch -->
-  <table>
+  <table id="mittwoch">
     <tr><td colspan="2" class="day">Mittwoch</td></tr>
     <tr><th>Zeit</th><th>Aktivität</th></tr>
     <tr><td>06:50</td><td>Aufstehen</td></tr>
-    <tr><td>06:50 - 07:45</td><td>Morgenroutine</td></tr>
+    <tr><td>06:50 - 07:45</td><td><span class="routine-link" onclick="openRoutine('morning')">Morgenroutine</span></td></tr>
     <tr><td>07:45 - 13:30</td><td>Schule</td></tr>
     <tr><td>13:30 - 14:00</td><td>Essen / Relax</td></tr>
     <tr><td>14:00 - 14:30</td><td>Lernen / Relax</td></tr>
     <tr><td>14:30 - 16:00</td><td>Workout (Sportplatz)</td></tr>
     <tr><td>16:00 - 18:30</td><td>Essen / Frei / Darius telefonieren</td></tr>
     <tr><td>18:30 - 21:00</td><td>Kirche</td></tr>
-    <tr><td>21:00</td><td>Abendroutine</td></tr>
+    <tr><td>21:00</td><td><span class="routine-link" onclick="openRoutine('evening')">Abendroutine</span></td></tr>
     <tr><td>22:00</td><td>Schlafen</td></tr>
   </table>
 
   <!-- Donnerstag -->
-  <table>
+  <table id="donnerstag">
     <tr><td colspan="2" class="day">Donnerstag</td></tr>
     <tr><th>Zeit</th><th>Aktivität</th></tr>
     <tr><td>06:00 / 08:00</td><td>Aufstehen</td></tr>
-    <tr><td>06:50 / 09:15</td><td>Morgenroutine</td></tr>
+    <tr><td>06:50 / 09:15</td><td><span class="routine-link" onclick="openRoutine('morning')">Morgenroutine</span></td></tr>
     <tr><td>06:50 / 09:15 - 17:00</td><td>Schule</td></tr>
     <tr><td>17:00 - 17:30</td><td>Relax</td></tr>
     <tr><td>17:30 - 18:00</td><td>Essen</td></tr>
     <tr><td>18:00 - 18:30</td><td>Lernen / Relax</td></tr>
     <tr><td>18:30 - 19:30</td><td>Workout</td></tr>
     <tr><td>19:30 - 20:00</td><td>Darius telefonieren / Relax</td></tr>
-    <tr><td>20:00</td><td>Abendroutine</td></tr>
+    <tr><td>20:00</td><td><span class="routine-link" onclick="openRoutine('evening')">Abendroutine</span></td></tr>
     <tr><td>22:00</td><td>Schlafen</td></tr>
   </table>
 
   <!-- Freitag -->
-  <table>
+  <table id="freitag">
     <tr><td colspan="2" class="day">Freitag (Restday)</td></tr>
     <tr><th>Zeit</th><th>Aktivität</th></tr>
     <tr><td>06:00</td><td>Aufstehen</td></tr>
-    <tr><td>06:00 - 06:50</td><td>Morgenroutine</td></tr>
+    <tr><td>06:00 - 06:50</td><td><span class="routine-link" onclick="openRoutine('morning')">Morgenroutine</span></td></tr>
     <tr><td>06:50 - 17:00</td><td>Schule</td></tr>
     <tr><td>17:00 - 17:15</td><td>Vorbereiten ADO</td></tr>
     <tr><td>17:15 - 22:00</td><td>Kirche</td></tr>
+    <tr><td>22:00</td><td><span class="routine-link" onclick="openRoutine('evening')">Abendroutine</span></td></tr>
   </table>
 
+  <!-- Modal Fenster -->
+  <div id="routineModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2 id="routineTitle"></h2>
+      <ul id="routineList"></ul>
+    </div>
+  </div>
+
+  <script>
+    function showDay(dayId) {
+      const tables = document.querySelectorAll("table");
+      const buttons = document.querySelectorAll(".day-buttons button");
+      tables.forEach(table => table.style.display = "none");
+      buttons.forEach(btn => btn.classList.remove("active"));
+      document.getElementById(dayId).style.display = "table";
+      document.querySelector(`button[onclick="showDay('${dayId}')"]`).classList.add("active");
+    }
+
+    // Routinen
+    const routines = {
+      morning: {
+        title: "Morgenroutine",
+        items: [
+          "1 Stunde bevor Bus kommt aufstehen",
+          "50 Liegestütze",
+          "Schultasche vorbereiten",
+          "Zähne putzen",
+          "Essen (Kakao jeden Früh)",
+          "Haare machen",
+          "Bett machen",
+          "Beten + Bibel lesen",
+          "Essen für Schule vorbereiten"
+        ]
+      },
+      evening: {
+        title: "Abendroutine",
+        items: [
+          "Creme benutzen",
+          "Zähne putzen",
+          "Outfit vorbereiten",
+          "mind. 8 Stunden Schlaf",
+          "Creatin nehmen",
+          "Schultasche vorbereiten"
+        ]
+      }
+    };
+
+    function openRoutine(type) {
+      const modal = document.getElementById("routineModal");
+      const title = document.getElementById("routineTitle");
+      const list = document.getElementById("routineList");
+      const routine = routines[type];
+
+      title.textContent = routine.title;
+      list.innerHTML = routine.items.map(item => `<li>${item}</li>`).join("");
+      modal.style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("routineModal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("routineModal");
+      if (event.target === modal) {
+        closeModal();
+      }
+    };
+  </script>
 </body>
 </html>

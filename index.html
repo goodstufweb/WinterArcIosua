@@ -124,7 +124,7 @@
 
   <!-- Navigation -->
   <div class="day-buttons">
-    <button onclick="showDay('montag')" class="active">Montag</button>
+    <button onclick="showDay('montag')">Montag</button>
     <button onclick="showDay('dienstag')">Dienstag</button>
     <button onclick="showDay('mittwoch')">Mittwoch</button>
     <button onclick="showDay('donnerstag')">Donnerstag</button>
@@ -132,7 +132,7 @@
   </div>
 
   <!-- Montag -->
-  <table id="montag" style="display: table;">
+  <table id="montag">
     <tr><td colspan="2" class="day">Montag</td></tr>
     <tr><th>Zeit</th><th>Aktivität</th></tr>
     <tr><td>06:00</td><td>Aufstehen</td></tr>
@@ -225,7 +225,6 @@
       document.querySelector(`button[onclick="showDay('${dayId}')"]`).classList.add("active");
     }
 
-    // Routinen
     const routines = {
       morning: {
         title: "Morgenroutine",
@@ -259,7 +258,6 @@
       const title = document.getElementById("routineTitle");
       const list = document.getElementById("routineList");
       const routine = routines[type];
-
       title.textContent = routine.title;
       list.innerHTML = routine.items.map(item => `<li>${item}</li>`).join("");
       modal.style.display = "block";
@@ -271,10 +269,20 @@
 
     window.onclick = function(event) {
       const modal = document.getElementById("routineModal");
-      if (event.target === modal) {
-        closeModal();
-      }
+      if (event.target === modal) closeModal();
     };
+
+    // 🆕 Automatische Tag-Erkennung (funktioniert jetzt sicher)
+    window.addEventListener("DOMContentLoaded", function() {
+      const wochentage = ["sonntag", "montag", "dienstag", "mittwoch", "donnerstag", "freitag", "samstag"];
+      const heute = new Date().getDay();
+      const tag = wochentage[heute];
+      if (["montag", "dienstag", "mittwoch", "donnerstag", "freitag"].includes(tag)) {
+        showDay(tag);
+      } else {
+        showDay("montag");
+      }
+    });
   </script>
 </body>
 </html>

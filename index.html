@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Winter Arc Plan</title>
   <style>
     body {
@@ -10,6 +11,7 @@
       margin: 20px;
       color: #333;
     }
+
     h1 {
       text-align: center;
       margin-bottom: 20px;
@@ -24,6 +26,7 @@
       margin-bottom: 30px;
       flex-wrap: wrap;
     }
+
     .day-buttons button {
       background: #34495e;
       color: white;
@@ -34,9 +37,11 @@
       font-size: 16px;
       transition: 0.3s;
     }
+
     .day-buttons button:hover {
       background: #2c3e50;
     }
+
     .day-buttons button.active {
       background: #1abc9c;
     }
@@ -48,20 +53,24 @@
       margin-bottom: 40px;
       background: #fff;
       box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
-      display: none; /* Standardmäßig ausgeblendet */
+      display: none;
     }
+
     th, td {
       border: 1px solid #ddd;
       padding: 12px;
       text-align: left;
     }
+
     th {
       background-color: #2c3e50;
       color: white;
     }
+
     tr:nth-child(even) {
       background-color: #f9f9f9;
     }
+
     .day {
       background: #34495e;
       color: white;
@@ -70,7 +79,6 @@
       font-size: 18px;
     }
 
-    /* Klickbare Routinen */
     .routine-link {
       color: #1abc9c;
       font-weight: bold;
@@ -90,6 +98,7 @@
       overflow: auto;
       background-color: rgba(0,0,0,0.5);
     }
+
     .modal-content {
       background-color: #fff;
       margin: 10% auto;
@@ -99,30 +108,80 @@
       max-width: 500px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
+
     .modal h2 {
       color: #2c3e50;
       text-align: center;
     }
+
     .modal ul {
       margin-top: 10px;
       list-style-type: disc;
       padding-left: 20px;
     }
+
     .close-btn {
       float: right;
       cursor: pointer;
       font-size: 20px;
       color: #555;
     }
+
     .close-btn:hover {
       color: #000;
+    }
+
+    /* 📱 Handy Ansicht */
+    @media (max-width: 768px) {
+      body {
+        margin: 10px;
+        font-size: 15px;
+      }
+
+      h1 {
+        font-size: 1.6em;
+      }
+
+      .day-buttons {
+        gap: 5px;
+      }
+
+      .day-buttons button {
+        padding: 8px 14px;
+        font-size: 0.9em;
+      }
+
+      table {
+        font-size: 14px;
+        display: none;
+        overflow-x: auto;
+      }
+
+      th, td {
+        padding: 10px;
+      }
+
+      .day {
+        font-size: 16px;
+        padding: 8px;
+      }
+
+      .routine-link {
+        font-size: 15px;
+      }
+
+      /* Tabellen können horizontal gescrollt werden */
+      .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 20px;
+      }
     }
   </style>
 </head>
 <body>
   <h1>Winter Arc Plan</h1>
 
-  <!-- Navigation -->
   <div class="day-buttons">
     <button onclick="showDay('montag')">Montag</button>
     <button onclick="showDay('dienstag')">Dienstag</button>
@@ -132,81 +191,91 @@
   </div>
 
   <!-- Montag -->
-  <table id="montag">
-    <tr><td colspan="2" class="day">Montag</td></tr>
-    <tr><th>Zeit</th><th>Aktivität</th></tr>
-    <tr><td>06:00</td><td>Aufstehen</td></tr>
-    <tr><td>06:00 - 06:50</td><td><span class="routine-link" onclick="openRoutine('morning')">Morgenroutine</span></td></tr>
-    <tr><td>06:50 - 14:30</td><td>Schule</td></tr>
-    <tr><td>14:30 - 15:30</td><td>Essen / Relax</td></tr>
-    <tr><td>15:30 - 16:00</td><td>Hausübungen</td></tr>
-    <tr><td>16:00 - 17:30</td><td>Workout (Spielplatz)</td></tr>
-    <tr><td>17:30 - 18:00</td><td>Relax / Business / Darius telefonieren</td></tr>
-    <tr><td>18:30 - 21:00</td><td>Kirche</td></tr>
-    <tr><td>21:00</td><td><span class="routine-link" onclick="openRoutine('evening')">Abendroutine</span></td></tr>
-    <tr><td>22:00</td><td>Schlafen</td></tr>
-  </table>
+  <div class="table-container">
+    <table id="montag">
+      <tr><td colspan="2" class="day">Montag</td></tr>
+      <tr><th>Zeit</th><th>Aktivität</th></tr>
+      <tr><td>06:00</td><td>Aufstehen</td></tr>
+      <tr><td>06:00 - 06:50</td><td><span class="routine-link" onclick="openRoutine('morning')">Morgenroutine</span></td></tr>
+      <tr><td>06:50 - 14:30</td><td>Schule</td></tr>
+      <tr><td>14:30 - 15:30</td><td>Essen / Relax</td></tr>
+      <tr><td>15:30 - 16:00</td><td>Hausübungen</td></tr>
+      <tr><td>16:00 - 17:30</td><td>Workout (Spielplatz)</td></tr>
+      <tr><td>17:30 - 18:00</td><td>Relax / Business / Darius telefonieren</td></tr>
+      <tr><td>18:30 - 21:00</td><td>Kirche</td></tr>
+      <tr><td>21:00</td><td><span class="routine-link" onclick="openRoutine('evening')">Abendroutine</span></td></tr>
+      <tr><td>22:00</td><td>Schlafen</td></tr>
+    </table>
+  </div>
 
   <!-- Dienstag -->
-  <table id="dienstag">
-    <tr><td colspan="2" class="day">Dienstag</td></tr>
-    <tr><th>Zeit</th><th>Aktivität</th></tr>
-    <tr><td>06:00</td><td>Aufstehen</td></tr>
-    <tr><td>06:00 - 06:50</td><td><span class="routine-link" onclick="openRoutine('morning')">Morgenroutine</span></td></tr>
-    <tr><td>06:50 - 17:00</td><td>Schule</td></tr>
-    <tr><td>17:00 - 18:00</td><td>Essen / Relax</td></tr>
-    <tr><td>18:00 - 18:30</td><td>Lernen</td></tr>
-    <tr><td>18:30 - 19:30</td><td>Workout</td></tr>
-    <tr><td>19:30 - 20:00</td><td>Dienstag Routine</td></tr>
-    <tr><td>20:00</td><td><span class="routine-link" onclick="openRoutine('evening')">Abendroutine</span></td></tr>
-    <tr><td>22:00 - 23:00</td><td>Schlafen</td></tr>
-  </table>
+  <div class="table-container">
+    <table id="dienstag">
+      <tr><td colspan="2" class="day">Dienstag</td></tr>
+      <tr><th>Zeit</th><th>Aktivität</th></tr>
+      <tr><td>06:00</td><td>Aufstehen</td></tr>
+      <tr><td>06:00 - 06:50</td><td><span class="routine-link" onclick="openRoutine('morning')">Morgenroutine</span></td></tr>
+      <tr><td>06:50 - 17:00</td><td>Schule</td></tr>
+      <tr><td>17:00 - 18:00</td><td>Essen / Relax</td></tr>
+      <tr><td>18:00 - 18:30</td><td>Lernen</td></tr>
+      <tr><td>18:30 - 19:30</td><td>Workout</td></tr>
+      <tr><td>19:30 - 20:00</td><td>Dienstag Routine</td></tr>
+      <tr><td>20:00</td><td><span class="routine-link" onclick="openRoutine('evening')">Abendroutine</span></td></tr>
+      <tr><td>22:00 - 23:00</td><td>Schlafen</td></tr>
+    </table>
+  </div>
 
   <!-- Mittwoch -->
-  <table id="mittwoch">
-    <tr><td colspan="2" class="day">Mittwoch</td></tr>
-    <tr><th>Zeit</th><th>Aktivität</th></tr>
-    <tr><td>06:50</td><td>Aufstehen</td></tr>
-    <tr><td>06:50 - 07:45</td><td><span class="routine-link" onclick="openRoutine('morning')">Morgenroutine</span></td></tr>
-    <tr><td>07:45 - 13:30</td><td>Schule</td></tr>
-    <tr><td>13:30 - 14:00</td><td>Essen / Relax</td></tr>
-    <tr><td>14:00 - 14:30</td><td>Lernen / Relax</td></tr>
-    <tr><td>14:30 - 16:00</td><td>Workout (Sportplatz)</td></tr>
-    <tr><td>16:00 - 18:30</td><td>Essen / Frei / Darius telefonieren</td></tr>
-    <tr><td>18:30 - 21:00</td><td>Kirche</td></tr>
-    <tr><td>21:00</td><td><span class="routine-link" onclick="openRoutine('evening')">Abendroutine</span></td></tr>
-    <tr><td>22:00</td><td>Schlafen</td></tr>
-  </table>
+  <div class="table-container">
+    <table id="mittwoch">
+      <tr><td colspan="2" class="day">Mittwoch</td></tr>
+      <tr><th>Zeit</th><th>Aktivität</th></tr>
+      <tr><td>06:50</td><td>Aufstehen</td></tr>
+      <tr><td>06:50 - 07:45</td><td><span class="routine-link" onclick="openRoutine('morning')">Morgenroutine</span></td></tr>
+      <tr><td>07:45 - 13:30</td><td>Schule</td></tr>
+      <tr><td>13:30 - 14:00</td><td>Essen / Relax</td></tr>
+      <tr><td>14:00 - 14:30</td><td>Lernen / Relax</td></tr>
+      <tr><td>14:30 - 16:00</td><td>Workout (Sportplatz)</td></tr>
+      <tr><td>16:00 - 18:30</td><td>Essen / Frei / Darius telefonieren</td></tr>
+      <tr><td>18:30 - 21:00</td><td>Kirche</td></tr>
+      <tr><td>21:00</td><td><span class="routine-link" onclick="openRoutine('evening')">Abendroutine</span></td></tr>
+      <tr><td>22:00</td><td>Schlafen</td></tr>
+    </table>
+  </div>
 
   <!-- Donnerstag -->
-  <table id="donnerstag">
-    <tr><td colspan="2" class="day">Donnerstag</td></tr>
-    <tr><th>Zeit</th><th>Aktivität</th></tr>
-    <tr><td>06:00 / 08:00</td><td>Aufstehen</td></tr>
-    <tr><td>06:50 / 09:15</td><td><span class="routine-link" onclick="openRoutine('morning')">Morgenroutine</span></td></tr>
-    <tr><td>06:50 / 09:15 - 17:00</td><td>Schule</td></tr>
-    <tr><td>17:00 - 17:30</td><td>Relax</td></tr>
-    <tr><td>17:30 - 18:00</td><td>Essen</td></tr>
-    <tr><td>18:00 - 18:30</td><td>Lernen / Relax</td></tr>
-    <tr><td>18:30 - 19:30</td><td>Workout</td></tr>
-    <tr><td>19:30 - 20:00</td><td>Darius telefonieren / Relax</td></tr>
-    <tr><td>20:00</td><td><span class="routine-link" onclick="openRoutine('evening')">Abendroutine</span></td></tr>
-    <tr><td>22:00</td><td>Schlafen</td></tr>
-  </table>
+  <div class="table-container">
+    <table id="donnerstag">
+      <tr><td colspan="2" class="day">Donnerstag</td></tr>
+      <tr><th>Zeit</th><th>Aktivität</th></tr>
+      <tr><td>06:00 / 08:00</td><td>Aufstehen</td></tr>
+      <tr><td>06:50 / 09:15</td><td><span class="routine-link" onclick="openRoutine('morning')">Morgenroutine</span></td></tr>
+      <tr><td>06:50 / 09:15 - 17:00</td><td>Schule</td></tr>
+      <tr><td>17:00 - 17:30</td><td>Relax</td></tr>
+      <tr><td>17:30 - 18:00</td><td>Essen</td></tr>
+      <tr><td>18:00 - 18:30</td><td>Lernen / Relax</td></tr>
+      <tr><td>18:30 - 19:30</td><td>Workout</td></tr>
+      <tr><td>19:30 - 20:00</td><td>Darius telefonieren / Relax</td></tr>
+      <tr><td>20:00</td><td><span class="routine-link" onclick="openRoutine('evening')">Abendroutine</span></td></tr>
+      <tr><td>22:00</td><td>Schlafen</td></tr>
+    </table>
+  </div>
 
   <!-- Freitag -->
-  <table id="freitag">
-    <tr><td colspan="2" class="day">Freitag (Restday)</td></tr>
-    <tr><th>Zeit</th><th>Aktivität</th></tr>
-    <tr><td>06:00</td><td>Aufstehen</td></tr>
-    <tr><td>06:00 - 06:50</td><td><span class="routine-link" onclick="openRoutine('morning')">Morgenroutine</span></td></tr>
-    <tr><td>06:50 - 17:00</td><td>Schule</td></tr>
-    <tr><td>17:00 - 17:15</td><td>Vorbereiten ADO</td></tr>
-    <tr><td>17:15 - 22:00</td><td>Kirche</td></tr>
-    <tr><td>22:00</td><td><span class="routine-link" onclick="openRoutine('evening')">Abendroutine</span></td></tr>
-  </table>
+  <div class="table-container">
+    <table id="freitag">
+      <tr><td colspan="2" class="day">Freitag (Restday)</td></tr>
+      <tr><th>Zeit</th><th>Aktivität</th></tr>
+      <tr><td>06:00</td><td>Aufstehen</td></tr>
+      <tr><td>06:00 - 06:50</td><td><span class="routine-link" onclick="openRoutine('morning')">Morgenroutine</span></td></tr>
+      <tr><td>06:50 - 17:00</td><td>Schule</td></tr>
+      <tr><td>17:00 - 17:15</td><td>Vorbereiten ADO</td></tr>
+      <tr><td>17:15 - 22:00</td><td>Kirche</td></tr>
+      <tr><td>22:00</td><td><span class="routine-link" onclick="openRoutine('evening')">Abendroutine</span></td></tr>
+    </table>
+  </div>
 
-  <!-- Modal Fenster -->
+  <!-- Modal -->
   <div id="routineModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -269,16 +338,17 @@
 
     window.onclick = function(event) {
       const modal = document.getElementById("routineModal");
-      if (event.target === modal) closeModal();
+      if (event.target === modal) {
+        closeModal();
+      }
     };
 
-    // 🆕 Automatische Tag-Erkennung (funktioniert jetzt sicher)
+    // Automatische Tag-Erkennung
     window.addEventListener("DOMContentLoaded", function() {
-      const wochentage = ["sonntag", "montag", "dienstag", "mittwoch", "donnerstag", "freitag", "samstag"];
-      const heute = new Date().getDay();
-      const tag = wochentage[heute];
-      if (["montag", "dienstag", "mittwoch", "donnerstag", "freitag"].includes(tag)) {
-        showDay(tag);
+      const tage = ["sonntag", "montag", "dienstag", "mittwoch", "donnerstag", "freitag", "samstag"];
+      const heute = tage[new Date().getDay()];
+      if (["montag","dienstag","mittwoch","donnerstag","freitag"].includes(heute)) {
+        showDay(heute);
       } else {
         showDay("montag");
       }
